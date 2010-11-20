@@ -12,6 +12,7 @@ my $builder = Module::Build->new(
         'File::Path'    => 0,
         'Path::Class'   => 0,
         'JSON::Util'    => 0,
+        'Class::Accessor::Chained::Fast' => 0,
     },
     build_requires => {
         'Test::More'        => 0,
@@ -20,7 +21,6 @@ my $builder = Module::Build->new(
         'File::Temp'        => 0,
     },
     add_to_cleanup      => [ 'App-Stash-*' ],
-    create_makefile_pl => 'traditional',
     create_readme       => 1,
     sign                => 1,
     meta_merge => {

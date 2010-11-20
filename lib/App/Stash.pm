@@ -2,7 +2,7 @@ package App::Stash;
 
 =head1 NAME
 
-App::Stash - persistant application data storage
+App::Stash - persistent application data storage
 
 =head1 SYNOPSIS
 
@@ -27,17 +27,17 @@ experimental, use on your own risk :-)
 The purpose of the module is to transparently save stash data (structure)
 across application (script) execution. The save is done in L</DESTROY>
 method. This has certain limitations. Basically make sure you never store
-object in the L</data> as this one may get destraoyed before L<App::Stash>
+object in the L</data> as this one may get destroyed before L<App::Stash>
 object does.
 
-The module+style is inspired by L<App::Cache>. Unlike L<App::Cache> it usese
+The module+style is inspired by L<App::Cache>. Unlike L<App::Cache> it uses
 L<JSON::Util> for storage and not L<Storable>. The stash is saved to
 F<$HOME/.app-name/stash.json>. It is in the "pretty" format so it should be
 easy to read and edit. I wanted to go with L<Storable> but using it in
 DESTROY method causes C<Segmentation fault> on my Perl.
 
 Warn: no file locking in place, use L<Proc::PID::File> or similar to have just one
-instance of program running or send a wishlist bugreport and wait for
+instance of program running or send a wish list bug report and wait for
 implementation of stash file locking. :)
 
 =cut
@@ -45,7 +45,7 @@ implementation of stash file locking. :)
 use warnings;
 use strict;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 use File::HomeDir;
 use File::Path qw( mkpath );
@@ -62,7 +62,7 @@ __PACKAGE__->mk_accessors(qw( application directory stash_filename ));
     directory
     stash_filename
 
-See L<App::Cache/new> for a descrition of C<application> and C<directory>.
+See L<App::Cache/new> for a description of C<application> and C<directory>.
 C<stash_filename> is the full path to the file where stash data will be
 stored. All three are optional.
 
@@ -121,7 +121,7 @@ sub data {
     return $self->{'data'};
 }
 
-=head2 dao
+=head2 dao()
 
 Returns L</data> passed to L<Data::AsObject/dao>. So basically the
 data structure becomes an object. See L<Data::AsObject> for details.
@@ -162,8 +162,8 @@ sub clear {
 
 =head2 load
 
-Load stash data from disk. Called automaticaly by first call to L</data>.
-Can be used to revert current stash data to the prexecution state.
+Load stash data from disk. Called automatically by first call to L</data>.
+Can be used to revert current stash data to the state before current execution.
 
 =cut
 
@@ -175,10 +175,10 @@ sub load {
 
 =head2 save
 
-Save stash data to disk - F<$HOME/.app-name/stash.json>. Called automaticaly
+Save stash data to disk - F<$HOME/.app-name/stash.json>. Called automatically
 via DESTROY method when L<App::Stash> object is going to be destroyed.
 
-Will throw an expection if the file save fails.
+Will throw an exception if the file save fails.
 
 =cut
 
